@@ -13,10 +13,12 @@ import torch
 from torchvision import transforms
 from PIL import Image
 from utils.model import ResNet9
+import smtplib
+
 
 # email and password to send enquiries to the contact us page
-OWN_EMAIL = 'rpmfarmington@gmail.com'
-OWN_PASSWORD = 'rgfednyqhatcyfhq'
+OWN_EMAIL = 'knowndetails2003@gmail.com'
+OWN_PASSWORD = 'fsxaajscnzycrryz'
 
 
 
@@ -66,10 +68,11 @@ disease_model.load_state_dict(torch.load(
 disease_model.eval()
 
 
+
 # newsletter subscription api
 def subscribe(email, user_group_email, api_key):
     r = requests.post(
-        f"https://api.mailgun.net/v3/lists/{user_group_email}/members",
+        f"https://api.mailgun.net/v3/{user_group_email}/members",
         auth=('api', api_key),
         data={'subscribed': True,
               'address': email})
@@ -144,8 +147,8 @@ def home():
         if request.method == "POST":
             user_email = request.form.get('email')
             response = subscribe(user_email=user_email,
-                                 user_group_email='farmington@sandboxc74dffa8f63e4c6f88fc4b3202287d2a.mailgun.org',
-                                 api_key='0cfdf4a1d9a6beeab37c3524df66b385-181449aa-a99f71e3')
+                                 user_group_email='postmaster@sandboxc370954e30554e4b8a8c529eb76bad39.mailgun.org',
+                                 api_key='0e8a1609655ebfdb77358f66346a2507-73f745ed-f9c55550')
         return render_template("index.html", title=title)
 
     return render_template("index.html", title=title)
@@ -214,7 +217,7 @@ def fert_recommend():
     P = int(request.form['phosphorus'])
     K = int(request.form['potassium'])
     # ph = float(request.form['ph'])
-    df = pd.read_csv('Data/fertilizer.csv')
+    df = pd.read_csv('Data-processed\\fertilizer.csv')
     try:
         nr = df[df['Crop'] == crop_name]['N'].iloc[0]
     except IndexError:
@@ -308,7 +311,6 @@ def contact():
 
 
 # NEWSLETTER SUBSCRIPTION
-
 
 def send_email(fname, email, phone, message):
     email_message = f"Subject: New Message \n\nFull Name: {fname}\nEmail:{email}\nPhone:{phone}\nMessage:{message}"
