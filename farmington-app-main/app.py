@@ -5,7 +5,11 @@ import pandas as pd
 
 app = Flask(__name__)
 
-# Your Flask routes and configurations here
+# Define your Flask routes and configurations here
+
+if __name__ == '__main__':
+    app.run()
+
 
 
 from utils.disease import disease_dic
