@@ -1,4 +1,5 @@
-gunlcorn
+gunicorn
+
 os
 certifi
 charset-normalizer
