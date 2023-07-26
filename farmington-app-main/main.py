@@ -258,6 +258,8 @@ def fert_recommend():
         return render_template('fertilizer-result.html', recommendation=response, title=title)
 
 
+
+
 @app.route('/disease-predict', methods=['GET', 'POST'])
 def disease_prediction():
     title = 'Farmington - Disease Detection'
