@@ -3,6 +3,11 @@ import numpy as np
 import pandas as pd
 
 
+app = Flask(__name__)
+
+# Your Flask routes and configurations here
+
+
 from utils.disease import disease_dic
 from utils.fertilizer import fertilizer_dic
 import requests
